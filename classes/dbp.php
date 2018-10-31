@@ -11,5 +11,6 @@ abstract class DbP {
     const DBUSER = 'root';
     const USERPWD = '';
     const DB = 'newworld';
-    const DSN = "mysql:host=".self::DBHOST.";dbname=".self::DB;
+    const CHARSET = 'utf8';
+    const DSN = "mysql:host=".self::DBHOST.";dbname=".self::DB.";charset=".self::CHARSET;
 }

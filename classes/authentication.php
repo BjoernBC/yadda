@@ -6,10 +6,10 @@
  * @copyright (c) 2017, nml
  * @license http://www.fsf.org/licensing/ GPLv3
  */
-require_once 'autha.php';
+require_once 'auth.php';
 
 
-class Authentication extends AuthA {
+class Authentication extends Auth {
 
     protected function __construct($user, $pwd) {
         parent::__construct($user);
