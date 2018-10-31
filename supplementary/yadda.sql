@@ -76,5 +76,23 @@ CALL newUser('admin@mail.dk', 'Admin Adminsen', 'admin', 'admin', 1, 1);
 CALL newUser('sirup@mail.dk', 'Søren Sirup', 'password', 'SizzleSoren', 0, 0);
 CALL newUser('mel@mail.dk', 'Morten Melboller', 'password', 'HotFudge', 1, 0);
 
-CALL newYadda('asdfasdfasdfasdfasfkanghbalhbsfafdkaljlkss h aslkhalshoauhffuiahfjjsdkjasdu asddfuhalkfj hasjfn laskdjf,df ,asjj kayejf 
-		bjsd ,adkjb ,k,mx,vkdjhgs,kghjsd v xckgjb rn gjs dfg,s dg sdff ng gfn gµf gsnd fg,sdmn fg', 1);
+CALL newYadda('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 1);
+
+CALL newYadda('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 2);
+
+CALL newYadda('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 3);
