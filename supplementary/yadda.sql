@@ -43,3 +43,25 @@ CREATE TABLE image(
 	file BLOB NOT NULL,
 	mimetype varchar(30) NOT NULL
 	);
+
+
+DELIMITER //
+
+DROP PROCEDURE IF EXISTS data//
+CREATE PROCEDURE data(email varchar(30), name varchar(30), pwd varchar(30), handle varchar(30), status boolean, permission int(11))
+BEGIN
+	INSERT INTO users(
+		email,
+		name,
+		password,
+		handle,
+		status,
+		permission)
+	VALUES (email, name, pwd, handle, status, permission);
+END//
+
+DELIMITER ;
+
+CALL data('admin@mail.dk', 'Admin Adminsen', 'admin', 'admin', 1, 1);
+CALL data('sirup@mail.dk', 'Søren Sirup', 'password', 'SizzleSoren', 0, 0);
+CALL data('sirup@mail.dk', 'Søren Sirup', 'password', 'HotFudge', 1, 0);
