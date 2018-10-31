@@ -1,13 +1,5 @@
 <?php
-/**
- * model/Authentication.inc.php
- * @package MVC_NML_Sample
- * @author nml
- * @copyright (c) 2017, nml
- * @license http://www.fsf.org/licensing/ GPLv3
- */
 require_once 'auth.php';
-
 
 class Authentication extends Auth {
 
