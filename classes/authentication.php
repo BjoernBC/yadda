@@ -32,17 +32,17 @@ class Authentication extends AuthA {
 
     protected static function dbLookUp($user, $pwdtry) {
         // Using prepared statement to prevent SQL injection
-        $sql = "select uid, password 
-                from user
-                where uid = :uid
+        $sql = "select id, password 
+                from users
+                where id = :id
                 and activated = true;";
         $dbh = Model::connect();
         try {
             $q = $dbh->prepare($sql);
-            $q->bindValue(':uid', $user);
+            $q->bindValue(':id', $user);
             $q->execute();
             $row = $q->fetch();
-            if (!($row['uid'] === $user
+            if (!($row['id'] === $user
                     && password_verify($pwdtry, $row['password']))) { 
                  throw new Exception("Not authenticated", 42);   //misery
             }
