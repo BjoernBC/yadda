@@ -1,5 +1,5 @@
 <?php
-require_once 'authi.php';
+require_once 'classes/authi.php';
 
 abstract class Auth implements AuthI {
     protected static $sessvar = 'nAuth42';

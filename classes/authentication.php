@@ -1,5 +1,5 @@
 <?php
-require_once 'auth.php';
+require_once 'classes/auth.php';
 
 class Authentication extends Auth {
 

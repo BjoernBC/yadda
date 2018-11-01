@@ -1,8 +1,8 @@
 <?php
-require_once '../dbh.php';
-require_once 'modelif.php';
+require_once 'classes/dbh.php';
+require_once 'classes/models/modelif.php';
 //require_once 'model.php';
-require_once '../authentication.php';
+require_once 'classes/authentication.php';
 
 abstract class Model implements ModelIf {
     

@@ -1,5 +1,5 @@
 <?php
-require_once 'dbp.php';
+require_once 'classes/dbp.php';
 
 class DbH extends DbP {
     private static $instance = FALSE;

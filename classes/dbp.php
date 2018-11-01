@@ -10,7 +10,7 @@ abstract class DbP {
     const DBHOST = 'localhost';
     const DBUSER = 'root';
     const USERPWD = '';
-    const DB = 'newworld';
+    const DB = 'yadda';
     const CHARSET = 'utf8';
     const DSN = "mysql:host=".self::DBHOST.";dbname=".self::DB.";charset=".self::CHARSET;
 }
