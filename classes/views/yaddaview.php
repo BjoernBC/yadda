@@ -1,5 +1,5 @@
 <?php
-//require_once 'model.php';
+require_once 'classes/views/View.php';
 
 class YaddaView extends View {
 

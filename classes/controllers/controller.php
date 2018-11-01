@@ -21,6 +21,19 @@ class Controller {
             default:
                 # code...
                 break;
+
+            case 'yadda':
+                require_once(rootPath . 'classes/models/yaddamodel.php');
+                require_once(rootPath . 'classes/views/yaddaview.php');
+                $model = new YaddaModel();
+                $view = new YaddaView($model);
+                $view->prepLogin();
+                return $view->output();
+                break;
+            
+            default:
+                # code...
+                break;
         }
     }
     public function auth($p){
