@@ -31,9 +31,9 @@ class YaddaModel extends Model {
     public function setUserid($userid){
     	$this->userid = $userid;
     }
-    public function setId($id){
-    	$this->id = $id;
-    }
+    // public function setId($id){
+    // 	$this->id = $id;
+    // }
 
     public function create(){
         $stmt = $this->con->prepare("INSERT INTO $this->table (content, created, edited, userid) VALUES (:content, :created, :userid)");
