@@ -6,10 +6,10 @@ class Controller {
     }
     public function drawPage($page){
         if($this->auth($_POST)){
-            
+
         }
         switch ($page){
-            case 'test':
+            case 'login':
                 require_once(rootPath . 'classes/models/usermodel.php');
                 require_once(rootPath . 'classes/views/userview.php');
                 $model = new UserModel();
