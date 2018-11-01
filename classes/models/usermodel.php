@@ -1,5 +1,5 @@
 <?php
-require_once('classes/models/model.php');
+require_once(rootPath . 'classes/models/model.php');
 class UserModel extends Model {
     private $con;
     private $id, $email, $name, $pwd, $handle, $status, $permission;
