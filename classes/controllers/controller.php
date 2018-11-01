@@ -5,7 +5,10 @@ class Controller {
 
     }
     public function drawPage($page){
-        switch ($page) {
+        if($this->auth($_POST)){
+            
+        }
+        switch ($page){
             case 'test':
                 require_once(rootPath . 'classes/models/usermodel.php');
                 require_once(rootPath . 'classes/views/userview.php');
@@ -20,18 +23,17 @@ class Controller {
                 break;
         }
     }
-    /*
-    public function auth($p) {
-        if (isset($p) && count($p) > 0) {
+    public function auth($p){
+        if (isset($p['user']) && count($p['user']) > 0){
             if (!Authentication::isAuthenticated() 
                     && Model::areCookiesEnabled()
-                    && isset($p['uid'])
-                    && isset($p['pwd'])) {
-                        Authentication::authenticate($p['uid'], $p['pwd']);
+                    && isset($p['user']['id'])
+                    && isset($p['user']['password'])) {
+                        return Authentication::authenticate($p['user']['id'], $p['user']['password']);
             }
-            $p = array();
         }
     }
+    /*
     public function createUser($p) {
         if (isset($p) && count($p) > 0) {
             $user = User::createObject($p);  // object from array

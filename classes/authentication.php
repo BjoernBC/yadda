@@ -1,5 +1,5 @@
 <?php
-require_once 'classes/auth.php';
+require_once rootPath . 'classes/auth.php';
 
 class Authentication extends Auth {
 
@@ -27,7 +27,7 @@ class Authentication extends Auth {
         $sql = "select id, password 
                 from users
                 where id = :id
-                and activated = true;";
+                and status = true;";
         $dbh = Model::connect();
         try {
             $q = $dbh->prepare($sql);

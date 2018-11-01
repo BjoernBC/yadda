@@ -60,7 +60,7 @@ class UserModel extends Model {
             ':name' => $this->name,
             ':pwd' => password_hash($this->pwd, PASSWORD_DEFAULT),
             ':handle' => $this->handle,
-            ':status' => $this->status,
+            ':status' => 0,
             ':permission' => $this->permission
         ));
     }

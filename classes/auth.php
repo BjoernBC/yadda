@@ -1,8 +1,8 @@
 <?php
-require_once 'classes/authi.php';
+require_once rootPath . 'classes/authi.php';
 
 abstract class Auth implements AuthI {
-    protected static $sessvar = 'nAuth42';
+    protected static $sessvar;
     protected static $logInstance = false;
     protected $userId;
     
