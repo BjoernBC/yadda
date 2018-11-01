@@ -81,12 +81,20 @@ class UserModel extends Model {
         $stmt->execute(array(':id' => $this->id));
     }
     public function retrieve(){
-        $stmt = $this->con->prepare("SELECT id, email, name, password, handle, status, permission WHERE id = :id OR email = :email OR (id = :id AND handle = :handle)");
+        $search = isset($this->id) ? array('col' => 'id', 'value' => $this->id) : array('col' => 'email', 'value' => $this->email);
+        $col = $search['col'];
+        $stmt = $this->con->prepare("SELECT id, email, name, password, handle, status, permission FROM $this->table WHERE $col = :val");
         $stmt->execute(array(
-            ':id' => $this->id,
-            ':email' => $this->email,
-            ':handle' => $this->handle
+            ':val' => $search['value']
         ));
+        $user = $stmt->fetchObject();
+        $this->id = $user->id;
+        $this->name = $user->name;
+        $this->email = $user->email;
+        $this->pwd = $user->password;
+        $this->handle = $user->handle;
+        $this->status = $user->status;
+        $this->permission = $user->permission;
     }
 }
 ?>
