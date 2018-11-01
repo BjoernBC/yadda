@@ -1,15 +1,8 @@
 <?php
-/**
- * model/AuthA.inc.php
- * @package MVC_NML_Sample
- * @author nml
- * @copyright (c) 2017, nml
- * @license http://www.fsf.org/licensing/ GPLv3
- */
-require_once 'authi.php';
+require_once 'classes/authi.php';
 
-abstract class AuthA implements AuthI {
-    protected static $sessvar = 'nAuth42'; // if set = logged on
+abstract class Auth implements AuthI {
+    protected static $sessvar = 'nAuth42';
     protected static $logInstance = false;
     protected $userId;
     

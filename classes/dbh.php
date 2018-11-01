@@ -1,12 +1,5 @@
 <?php
-/**
- * model/DbH.inc.php
- * @package MVC_NML_Sample
- * @author nml
- * @copyright (c) 2017, nml
- * @license http://www.fsf.org/licensing/ GPLv3
- */
-require_once 'dbp.php';
+require_once 'classes/dbp.php';
 
 class DbH extends DbP {
     private static $instance = FALSE;

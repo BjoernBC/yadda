@@ -1,12 +1,10 @@
 <?php
 //require_once 'model.php';
 
-abstract class View {
-
-    protected $model;
+class UserView extends View {
 
     public function __construct($model) {
-        $this->model = $model;
+    	parent::__construct($model);
     }
     public function output() {
 

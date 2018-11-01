@@ -1,20 +1,11 @@
 <?php
-/**
- * model/ModelA.inc.php
- * @package MVC_NML_Sample
- * @author nml
- * @copyright (c) 2017, nml
- * @license http://www.fsf.org/licensing/ GPLv3
- */
-require_once '../dbh.php';
-require_once 'modelif.php';
-require_once 'model.php';
-require_once '../authentication.php';
+require_once 'classes/dbh.php';
+require_once 'classes/models/modelif.php';
+//require_once 'model.php';
+require_once 'classes/authentication.php';
 
 abstract class Model implements ModelIf {
-    /*
-     *
-     */
+    
     private static $dbh;
     private static $cookieQ = true;
 
