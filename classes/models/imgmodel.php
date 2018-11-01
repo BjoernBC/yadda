@@ -1,5 +1,5 @@
 <?php 
-require_once('classes/models/model.php');
+require_once(rootPath . 'classes/models/model.php');
 class ImgModel extends Model{
 	private $con;
 	private $id, $img, $imgtype, $alttext;
