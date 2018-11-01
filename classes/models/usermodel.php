@@ -81,20 +81,30 @@ class UserModel extends Model {
         $stmt->execute(array(':id' => $this->id));
     }
     public function retrieve(){
-        $search = isset($this->id) ? array('col' => 'id', 'value' => $this->id) : array('col' => 'email', 'value' => $this->email);
-        $col = $search['col'];
-        $stmt = $this->con->prepare("SELECT id, email, name, password, handle, status, permission FROM $this->table WHERE $col = :val");
-        $stmt->execute(array(
-            ':val' => $search['value']
-        ));
-        $user = $stmt->fetchObject();
-        $this->id = $user->id;
-        $this->name = $user->name;
-        $this->email = $user->email;
-        $this->pwd = $user->password;
-        $this->handle = $user->handle;
-        $this->status = $user->status;
-        $this->permission = $user->permission;
+        if(isset($this->id)){
+            $search = array('col' => 'id', 'value' => $this->id);
+        }
+        else if(isset($this->email)){
+            $search = array('col' => 'email', 'value' => $this->email);
+        }
+        else{
+            $search = false;
+        }
+        if($search){
+            $col = $search['col'];
+            $stmt = $this->con->prepare("SELECT id, email, name, password, handle, status, permission FROM $this->table WHERE $col = :val");
+            $stmt->execute(array(
+                ':val' => $search['value']
+            ));
+            $user = $stmt->fetchObject();
+            $this->id = $user->id;
+            $this->name = $user->name;
+            $this->email = $user->email;
+            $this->pwd = $user->password;
+            $this->handle = $user->handle;
+            $this->status = $user->status;
+            $this->permission = $user->permission;
+        }
     }
 }
 ?>
