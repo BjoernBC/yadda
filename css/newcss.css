@@ -1,0 +1,47 @@
+#deskHeader {
+    width: 100%;
+    max-width: 100%;
+}
+#deskHeader .navBar {
+    max-width: 100%;
+    max-height: 100px;
+}
+#mobHeader .navBar ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+#mobHeader {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    max-width: 100%;
+}
+#mobHeader .navBar {
+    max-width: 100%;
+    width: 100%;
+    max-height: 12em;
+    position: fixed;
+    bottom: 0px;
+}
+.mobNavBtn {
+    width: 25%;
+    max-height: 100%;
+    height: 12em;
+    border-top: black 1px solid;
+    text-decoration: none;
+    text-align: center;
+    position: relative;
+}
+.mobNavBtn p {
+    
+    margin: auto;
+}
+ul {
+    margin: 0;
+    padding: 0;
+}
+body {
+    margin: 0;
+    padding: 0;
+}

@@ -1,3 +1,4 @@
+<style><?php include 'css/newcss.css'; ?></style>
 <?php
 require_once('classes/dbh.php');
 $dbCon =  $dbh = DbH::getDbH();
