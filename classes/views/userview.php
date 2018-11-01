@@ -1,5 +1,5 @@
 <?php
-require_once 'classes/views/View.php';
+require_once(rootPath . 'classes/views/View.php');
 
 class UserView extends View{
 	private $content;
@@ -12,6 +12,7 @@ class UserView extends View{
     	$str .= "<input type='text' name='email' placeholder='Your email, now!'>";
     	$str .= "<input type='password' name='password' placeholder='and also your password...'>";
     	$str .= "<input type='submit' value='Go HAM'>";
+        $str .= "</form>";
         if($store){
             $this->content[] = $str;
         }
@@ -23,6 +24,7 @@ class UserView extends View{
         $str .= "<input type='text' name='email' placeholder='Your email, now!'>";
         $str .= "<input type='password' name='password' placeholder='and also your password...'>";
         $str .= "<input type='submit' value='Go HAM'>";
+        $str .= "</form>";
         if($store){
             $this->content[] = $str;
         }
@@ -32,9 +34,8 @@ class UserView extends View{
         unset($this->content);
     }
     public function output(){
-        $data = $this->content;
         $str = $this->prepHead();
-        foreach($data as $content){
+        foreach($this->content as $content){
             $str .= $content;
         }
         $str .= $this->prepEnd();
