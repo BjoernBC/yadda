@@ -36,19 +36,20 @@ class YaddaModel extends Model {
     }
 
     public function create(){
-        $stmt = $this->con->prepare("INSERT INTO $this->table (content, created, userid) VALUES (:content, :created, :userid)");
+        $stmt = $this->con->prepare("INSERT INTO $this->table (content, created, edited, userid) VALUES (:content, :created, :userid)");
         $stmt->execute(array(
             ':content' => $this->content,
             ':created' => $this->created,
+            ':edited' => $this->edited,
             ':userid' => $this->userid
         ));
     }
     public function update(){
-        $stmt = $this->con->prepare("UPDATE $this->table SET content = :content, created = :edited, userid = :userid WHERE id = :id");
+        $stmt = $this->con->prepare("UPDATE $this->table SET content = :content, edited = :edited, userid = :userid WHERE id = :id");
         $stmt->execute(array(
             ':id' => $this->id,
             ':content' => $this->content,
-            ':created' => $this->edited,
+            ':edited' => $this->edited,
             ':userid' => $this->userid
         ));
     }
@@ -62,15 +63,12 @@ class YaddaModel extends Model {
         if(isset($this->id)){
             $search = array('col' => 'id', 'value' => $this->id);
         }
-        else if(isset($this->userid)){
-            $search = array('col' => 'userid', 'value' => $this->userid);
-        }
         else{
             $search = false;
         }
         if($search){
             $col = $search['col'];
-            $stmt = $this->con->prepare("SELECT id, content, created, userid FROM $this->table WHERE $col = :val");
+            $stmt = $this->con->prepare("SELECT id, content, created, edited, userid FROM $this->table WHERE $col = :val");
             $stmt->execute(array(
                 ':val' => $search['value']
             ));
@@ -78,8 +76,9 @@ class YaddaModel extends Model {
             $this->id = $yadda->id;
             $this->content = $yadda->content;
             $this->created = $yadda->created;
+            $this->edited = $yadda->edited;
             $this->userid = $yadda->userid;
         }
     }
-
+}
 ?>

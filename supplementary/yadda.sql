@@ -22,6 +22,7 @@ CREATE TABLE yadda(
 	id int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
 	content varchar(167) NOT NULL,
 	created datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	edited datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	userid int(11) NOT NULL,
 	FOREIGN KEY (userid) REFERENCES users(id)
 	);
@@ -41,7 +42,8 @@ CREATE TABLE yadda_has_images(
 CREATE TABLE image(
 	id int(11) PRIMARY KEY NOT NULL,
 	file BLOB NOT NULL,
-	mimetype varchar(30) NOT NULL
+	mimetype varchar(30) NOT NULL,
+	alttext varchar(30) NOT NULL
 	);
 
 
