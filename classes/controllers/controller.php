@@ -4,6 +4,22 @@ class Controller {
     public function __construct() {
 
     }
+    public function drawPage($page){
+        switch ($page) {
+            case 'test':
+                require_once(rootPath . 'classes/models/usermodel.php');
+                require_once(rootPath . 'classes/views/userview.php');
+                $model = new UserModel();
+                $view = new UserView($model);
+                $view->prepLogin();
+                return $view->output();
+                break;
+            
+            default:
+                # code...
+                break;
+        }
+    }
     /*
     public function auth($p) {
         if (isset($p) && count($p) > 0) {

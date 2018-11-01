@@ -77,8 +77,19 @@ class UserModel extends Model {
         ));
     }
     public function delete(){
-        $stmt = $this->con->prepare("DELETE * FROM $this->table WHERE id = :id");
-        $stmt->execute(array(':id' => $this->id));
+        if(isset($this->id)){
+            $search = array('col' => 'id', 'value' => $this->id);
+        }
+        else if(isset($this->email)){
+            $search = array('col' => 'email', 'value' => $this->email);
+        }
+        else{
+            $search = false;
+        }
+        if($search){
+            $stmt = $this->con->prepare("DELETE * FROM $this->table WHERE id = :id");
+            $stmt->execute(array(':id' => $this->id));
+        }
     }
     public function retrieve(){
         if(isset($this->id)){
