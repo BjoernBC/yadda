@@ -1,5 +1,6 @@
 <?php 
 require_once(rootPath . 'classes/models/model.php');
+require_once(rootPath . 'classes/models/usermodel.php');
 class YaddaModel extends Model {
     private $con;
     private $id, $content, $created, $edited, $userid;
