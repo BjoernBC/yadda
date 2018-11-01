@@ -36,7 +36,19 @@ jkindex
 			</div>
 
 		</div>
-		
+            <div class="YaddaHeaderRight">
+            <div class="YaddaListenContainer">
+                <label class='YaddaListen'>
+                    <input type="checkbox">
+                    <span class="YaddaListenBtn">
+                        Listen
+                    </span>
+                    <span class="YaddaUnlistenBtn">
+                        Unlisten
+                    </span>
+                </label>
+            </div>
+            
 		<div class="YaddaLike">
 
 			<div class="YaddaRate">
@@ -57,7 +69,6 @@ jkindex
 
 				</div>
 			</div>
-		</div>
 
 		<div class="YaddaRateResult">
 			
@@ -85,8 +96,9 @@ jkindex
 
 				</div>				
 			</div>
+            </div>
 		</div>
-	</div>
+        </div>
 	
 	<div class="YaddaMsg">
 
