@@ -17,10 +17,6 @@ class Controller {
                 $view->prepLogin();
                 return $view->output();
                 break;
-            
-            default:
-                # code...
-                break;
 
             case 'yadda':
                 require_once(rootPath . 'classes/models/yaddamodel.php');
@@ -45,6 +41,13 @@ class Controller {
                         return Authentication::authenticate($p['user']['id'], $p['user']['password']);
             }
         }
+    }
+    public function userLogin(){
+        require_once(rootPath . 'classes/models/usermodel.php');
+        $this->auth($_POST);
+    }
+    public function userCreate(){
+
     }
     /*
     public function createUser($p) {

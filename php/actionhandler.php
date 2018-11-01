@@ -1,11 +1,8 @@
 <?php
+define('rootPath', '../');
+require_once('../classes/controllers/controller.php');
 $action = $_POST['action'];
-$action();
-function userLogin(){
-	echo "yoyoyo";
-}
-function userCreate(){
-	echo "gawd dammit!";
-}
+$controller = new Controller();
+$controller->$action();
 //header("location: " . $_SERVER['HTTP_REFERER']);
 ?>
