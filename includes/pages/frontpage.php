@@ -1,10 +1,32 @@
-<h1>yoyoyo</h1>
-<a href="?page=hello-world">anden side</a>
 <div id="deskHeader"> <!-- Header med nav bar til Desktop -->
-    
+    <nav class="navBar">
+        <div> <!-- Home knap -->
+            <ul>
+                <li>
+                    <a href="index.php">
+                        <img src="Test avatar.png">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="deskNavBrugerContainer">
+            <ul class='deskNavBruger'>
+                <li> <!-- Instillinger -->
+                    <a href="settings.php">
+                        <img src="Test avatar.png" />
+                    </a>
+                </li>
+                <li> <!-- Profil -->
+                    <a href="profil.php">
+                        <img src="Test avatar.png">
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 </div>
 
-<div id="mobHeader"> <!-- Header med nav bar til Mobil -->
+<div id="mobHeader" style="display: none;"> <!-- Header med nav bar til Mobil -->
     <nav class="navBar">
         <ul>
             <li class="mobNavBtn"> <!-- Home knap -->
