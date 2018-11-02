@@ -8,9 +8,9 @@ class UserView extends View{
     }
     public function prepLogin($store = true){
         $str = "<form action='php/actionhandler.php' method='POST'>";
-        $str .= "<input type='hidden' name='action' value='userLogin'>";
-    	$str .= "<input type='text' name='email' placeholder='Your email, now!'>";
-    	$str .= "<input type='password' name='password' placeholder='and also your password...'>";
+        $str .= "<input type='hidden' name='action' value='auth'>";
+    	$str .= "<input type='text' name='user[email]' placeholder='Your email, now!'>";
+    	$str .= "<input type='password' name='user[password]' placeholder='and also your password...'>";
     	$str .= "<input type='submit' value='Go HAM'>";
         $str .= "</form>";
         if($store){
@@ -21,8 +21,8 @@ class UserView extends View{
     public function prepNewUser($store = true){
         $str = "<form action='php/actionhandler.php' method='POST'>";
         $str .= "<input type='hidden' name='action' value='userCreate'>";
-        $str .= "<input type='text' name='email' placeholder='Your email, now!'>";
-        $str .= "<input type='password' name='password' placeholder='and also your password...'>";
+        $str .= "<input type='text' name='user[\"email\"]' placeholder='Your email, now!'>";
+        $str .= "<input type='password' name='user[\"password\"]' placeholder='and also your password...'>";
         $str .= "<input type='submit' value='Go HAM'>";
         $str .= "</form>";
         if($store){

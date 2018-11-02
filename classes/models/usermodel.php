@@ -65,12 +65,20 @@ class UserModel extends Model {
         ));
     }
     public function update(){
+        $stmt = $this->con->prepare("SELECT password FROM $this->table WHERE id = :id");
+        $stmt->execute(array(
+            ':id' => $this->id
+        ));
+        $oldPwd = $stmt->fetchObject();
+        if($this->pwd !== $oldPwd->password){
+            $this->pwd = password_hash($this->pwd, PASSWORD_DEFAULT);
+        }
         $stmt = $this->con->prepare("UPDATE $this->table SET name = :name, email = :email, password = :pwd, handle = :handle, status = :status, permission = :permission WHERE id = :id");
         $stmt->execute(array(
             ':id' => $this->id,
             ':email' => $this->email,
             ':name' => $this->name,
-            ':pwd' => password_hash($this->pwd, PASSWORD_DEFAULT),
+            ':pwd' => $this->pwd,
             ':handle' => $this->handle,
             ':status' => $this->status,
             ':permission' => $this->permission

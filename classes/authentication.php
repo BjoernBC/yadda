@@ -2,39 +2,37 @@
 require_once rootPath . 'classes/auth.php';
 
 class Authentication extends Auth {
-
-    protected function __construct($user, $pwd) {
+    protected function __construct($user, $pwd){
         parent::__construct($user);
-        try {
+        try{
             self::dbLookUp($user, $pwd);                        // invoke auth
             $_SESSION[self::$sessvar] = $this->getUserId();     // succes
         }
-        catch (Exception $e) {
+        catch (Exception $e){
             self::$logInstance = FALSE;
             unset($_SESSION[self::$sessvar]);                   //miserys
         }      
     }
-
     public static function authenticate($user, $pwd) {
-        if (! self::$logInstance) {
+        echo self::$logInstance;
+        if (!self::$logInstance){
             self::$logInstance = new Authentication($user, $pwd);
         }
         return self::$logInstance;
     }
-
     protected static function dbLookUp($user, $pwdtry) {
         // Using prepared statement to prevent SQL injection
-        $sql = "select id, password 
+        $sql = "select id, email, password 
                 from users
-                where id = :id
+                where email = :email
                 and status = true;";
         $dbh = Model::connect();
         try {
             $q = $dbh->prepare($sql);
-            $q->bindValue(':id', $user);
+            $q->bindValue(':email', $user);
             $q->execute();
             $row = $q->fetch();
-            if (!($row['id'] === $user
+            if (!($row['email'] === $user
                     && password_verify($pwdtry, $row['password']))) { 
                  throw new Exception("Not authenticated", 42);   //misery
             }
