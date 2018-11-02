@@ -40,7 +40,7 @@ CREATE TABLE yadda_has_images(
 	);
 
 CREATE TABLE image(
-	id int(11) PRIMARY KEY NOT NULL,
+	id int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
 	file BLOB NOT NULL,
 	mimetype varchar(30) NOT NULL,
 	alttext varchar(30) NOT NULL

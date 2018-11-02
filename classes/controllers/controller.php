@@ -20,9 +20,11 @@ class Controller {
                 require_once(rootPath . 'classes/models/yaddamodel.php');
                 require_once(rootPath . 'classes/views/yaddaview.php');
                 $model = new YaddaModel();
+                $model->setId(3);
+                $model->retrieve();
                 $view = new YaddaView($model);
-                $view->prepLogin();
-                return $view->output();
+                $view->displayAuthor().$view->displayContent().$view->displayDate();
+                return $view->display();
                 break;
             
             default:
