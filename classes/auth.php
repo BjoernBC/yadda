@@ -1,29 +1,29 @@
 <?php
-require_once 'classes/authi.php';
+require_once rootPath . 'classes/authi.php';
 
-abstract class Auth implements AuthI {
-    protected static $sessvar = 'nAuth42';
+abstract class Auth implements AuthI{
+    protected static $sessvar = "authBot9000";
     protected static $logInstance = false;
     protected $userId;
     
-    protected function __construct($user) {
+    protected function __construct($user){
         $this->userId = $user;
     }
     
     
-    public function getUserId() {
+    public function getUserId(){
         return $this->userId;
     }
     
-    public static function getLoginId() {
+    public static function getLoginId(){
         return isset($_SESSION[self::$sessvar]) ? $_SESSION[self::$sessvar] : 'nobody';
     }
 
-    public static function isAuthenticated() {
+    public static function isAuthenticated(){
       return isset($_SESSION[self::$sessvar]) ? true : false;
     }
     
-    public static function logout() {
+    public static function logout(){
         setcookie(session_name(), '', 0, '/');
         session_unset();
         session_destroy();

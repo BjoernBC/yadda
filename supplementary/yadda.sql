@@ -22,6 +22,7 @@ CREATE TABLE yadda(
 	id int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
 	content varchar(167) NOT NULL,
 	created datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	edited datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	userid int(11) NOT NULL,
 	FOREIGN KEY (userid) REFERENCES users(id)
 	);
@@ -39,9 +40,10 @@ CREATE TABLE yadda_has_images(
 	);
 
 CREATE TABLE image(
-	id int(11) PRIMARY KEY NOT NULL,
+	id int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
 	file BLOB NOT NULL,
-	mimetype varchar(30) NOT NULL
+	mimetype varchar(30) NOT NULL,
+	alttext varchar(30) NOT NULL
 	);
 
 
@@ -72,9 +74,9 @@ END//
 
 DELIMITER ;
 
-CALL newUser('admin@mail.dk', 'Admin Adminsen', 'admin', 'admin', 1, 1);
-CALL newUser('sirup@mail.dk', 'Søren Sirup', 'password', 'SizzleSoren', 0, 0);
-CALL newUser('mel@mail.dk', 'Morten Melboller', 'password', 'HotFudge', 1, 0);
+CALL newUser('admin@mail.dk', 'Admin Adminsen', '$2y$10$1InkUgCjFFbIr4/Lk/N8q.keWoNy35EZbxUtXJRRHzXrOqrbKqVpy', 'admin', 1, 1);
+CALL newUser('sirup@mail.dk', 'Søren Sirup', '$2y$10$1InkUgCjFFbIr4/Lk/N8q.keWoNy35EZbxUtXJRRHzXrOqrbKqVpy', 'SizzleSoren', 0, 0);
+CALL newUser('mel@mail.dk', 'Morten Melboller', '$2y$10$1InkUgCjFFbIr4/Lk/N8q.keWoNy35EZbxUtXJRRHzXrOqrbKqVpy', 'HotFudge', 1, 0);
 
 CALL newYadda('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,

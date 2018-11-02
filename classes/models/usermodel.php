@@ -1,8 +1,8 @@
 <?php
-require_once('classes/models/model.php');
+require_once(rootPath . 'classes/models/model.php');
 class UserModel extends Model {
     private $con;
-    private $id, $email, $name, $pwd, $handle, $status, $permission;
+    private $id, $email, $name, $pwd, $handle, $status, $permission, $yaddas = array();
     public function __construct($table = "users") {
         parent::__construct();
         $this->con = $this->connect();
@@ -54,31 +54,56 @@ class UserModel extends Model {
     }
 
     public function create(){
-        $stmt = $this->con->prepare("INSERT INTO $this->table (name, email, password, handle, status, permission) VALUES (:name, :email, :pwd, :handle, :status, :permission)");
+        $stmt = $this->con->prepare("SELECT * FROM $this->table WHERE email = :email");
         $stmt->execute(array(
-            ':email' => $this->email,
-            ':name' => $this->name,
-            ':pwd' => password_hash($this->pwd, PASSWORD_DEFAULT),
-            ':handle' => $this->handle,
-            ':status' => $this->status,
-            ':permission' => $this->permission
+            ':email' => $this->email
         ));
+        if($stmt->rowCount() == 0){
+            $stmt = $this->con->prepare("INSERT INTO $this->table (name, email, password, handle, status, permission) VALUES (:name, :email, :pwd, :handle, :status, :permission)");
+            $stmt->execute(array(
+                ':email' => $this->email,
+                ':name' => $this->name,
+                ':pwd' => password_hash($this->pwd, PASSWORD_DEFAULT),
+                ':handle' => $this->handle,
+                ':status' => 1,
+                ':permission' => 0
+            ));
+        }
     }
     public function update(){
+        $stmt = $this->con->prepare("SELECT password FROM $this->table WHERE id = :id");
+        $stmt->execute(array(
+            ':id' => $this->id
+        ));
+        $oldPwd = $stmt->fetchObject();
+        if($this->pwd !== $oldPwd->password){
+            $this->pwd = password_hash($this->pwd, PASSWORD_DEFAULT);
+        }
         $stmt = $this->con->prepare("UPDATE $this->table SET name = :name, email = :email, password = :pwd, handle = :handle, status = :status, permission = :permission WHERE id = :id");
         $stmt->execute(array(
             ':id' => $this->id,
             ':email' => $this->email,
             ':name' => $this->name,
-            ':pwd' => password_hash($this->pwd, PASSWORD_DEFAULT),
+            ':pwd' => $this->pwd,
             ':handle' => $this->handle,
             ':status' => $this->status,
             ':permission' => $this->permission
         ));
     }
     public function delete(){
-        $stmt = $this->con->prepare("DELETE * FROM $this->table WHERE id = :id");
-        $stmt->execute(array(':id' => $this->id));
+        if(isset($this->id)){
+            $search = array('col' => 'id', 'value' => $this->id);
+        }
+        else if(isset($this->email)){
+            $search = array('col' => 'email', 'value' => $this->email);
+        }
+        else{
+            $search = false;
+        }
+        if($search){
+            $stmt = $this->con->prepare("DELETE * FROM $this->table WHERE id = :id");
+            $stmt->execute(array(':id' => $this->id));
+        }
     }
     public function retrieve(){
         if(isset($this->id)){
@@ -105,6 +130,18 @@ class UserModel extends Model {
             $this->status = $user->status;
             $this->permission = $user->permission;
         }
+
+    }
+    public function retrieveAll(){
+        $sql = "SELECT id FROM $this->table";
+        $arr = array(); 
+        foreach($this->con->query($sql) as $row){
+            $user = new userModel();
+            $user->setId($row['id']);
+            $user->retrieve();
+            $arr[] = $user;
+        }
+        return $arr;
     }
 }
 ?>
