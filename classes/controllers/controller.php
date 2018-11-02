@@ -6,11 +6,18 @@ class Controller {
 
     }
     public function drawPage($page){
+        //print_r($_SESSION);
+        if($page != 'login' && $page != 'create-user' && !Authentication::isAuthenticated()){
+            header('location: ' . rootPath . 'index.php?page=create-user');
+        }
         switch ($page){
             case 'login':
                 require_once(rootPath . 'classes/models/usermodel.php');
                 require_once(rootPath . 'classes/views/userview.php');
                 $model = new UserModel();
+                echo "<pre>";
+                print_r($model->retrieveAll());
+                echo "</pre>";
                 $view = new UserView($model);
                 $view->prepLogin();
                 return $view->output();
@@ -29,6 +36,7 @@ class Controller {
                 require_once(rootPath . 'classes/models/yaddamodel.php');
                 require_once(rootPath . 'classes/views/yaddaview.php');
                 $model = new YaddaModel();
+                //$model->retrieveAll();
                 $model->setId(3);
                 $model->retrieve();
                 $view = new YaddaView($model);
@@ -37,7 +45,7 @@ class Controller {
                 break;
             
             default:
-                # code...
+                return "page not found";
                 break;
         }
     }
@@ -48,9 +56,6 @@ class Controller {
         if (isset($p['user']) && count($p['user']) > 0){
             if (!Authentication::isAuthenticated() && Model::areCookiesEnabled() && isset($p['user']['email']) && isset($p['user']['password'])) {
                 Authentication::authenticate($p['user']['email'], $p['user']['password']);
-                if(Authentication::isAuthenticated()){
-                    echo "success";
-                }
             }
         }
     }
@@ -65,6 +70,16 @@ class Controller {
         $model->setHandle($user['handle']);
         $model->setPwd($user['password']);
         $model->create();
+        header("location: " . rootPath . "index.php?page=login");
+    }
+    public function userLogin($p){
+        $this->auth($p);
+        if(Authentication::isAuthenticated()){
+            header("location: " . rootPath . "index.php?page=asdf");
+        }
+        else{
+            header("location: " . rootPath . "index.php?page=login");
+        }
     }
     /*
     public function createUser($p) {

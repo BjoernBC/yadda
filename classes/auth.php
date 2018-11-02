@@ -2,7 +2,7 @@
 require_once rootPath . 'classes/authi.php';
 
 abstract class Auth implements AuthI{
-    protected static $sessvar;
+    protected static $sessvar = "authBot9000";
     protected static $logInstance = false;
     protected $userId;
     

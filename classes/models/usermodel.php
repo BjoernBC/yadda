@@ -129,12 +129,19 @@ class UserModel extends Model {
             $this->handle = $user->handle;
             $this->status = $user->status;
             $this->permission = $user->permission;
-            
         }
 
     }
     public function retrieveAll(){
-
+        $sql = "SELECT id FROM $this->table";
+        $arr = array(); 
+        foreach($this->con->query($sql) as $row){
+            $user = new userModel();
+            $user->setId($row['id']);
+            $user->retrieve();
+            $arr[] = $user;
+        }
+        return $arr;
     }
 }
 ?>

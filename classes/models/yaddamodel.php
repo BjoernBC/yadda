@@ -4,7 +4,7 @@ require_once(rootPath . 'classes/models/usermodel.php');
 require_once(rootPath . 'classes/models/imgmodel.php');
 class YaddaModel extends Model {
     private $con;
-    private $id, $content, $created, $edited, $userid, $user;
+    private $id, $content, $created, $edited, $userid, $user, $children;
     public function __construct($table = "yadda") {
         parent::__construct();
         $this->con = $this->connect();
@@ -42,7 +42,9 @@ class YaddaModel extends Model {
     public function setUserid($userid){
     	$this->userid = $userid;
     }
-
+    public function setChildren($children){
+        $this->children = $children;
+    }
     public function create(){
         $stmt = $this->con->prepare("INSERT INTO $this->table (content, created, edited, userid) VALUES (:content, :created, :userid)");
         $stmt->execute(array(
@@ -99,6 +101,52 @@ class YaddaModel extends Model {
             $img->retrieve();
             $this->img = $img;
             // $this->alttext = $alttext;
+        }
+    }
+    public function retrieveAll(){
+        $yaddas = array();
+        $relations = array();
+        $sql = "SELECT id, content FROM $this->table ORDER BY id DESC";
+        foreach($this->con->query($sql) as $row){
+            $yaddas[$row['id']] = $row;
+        }
+        $sql = "SELECT parent, child FROM yadda_rel";
+        foreach($this->con->query($sql) as $row){
+            $relations[$row['parent']][] = $row['child'];
+            $children[] = $row['child'];
+        }
+        $yaddaSorted = array();
+        foreach($yaddas as $key => $yadda){
+            if(!in_array($key, $children)){
+                    $yaddaM = new YaddaModel();
+                    $yaddaM->setId($key);
+                    $yaddaM->retrieve();
+                    $temp = $this->recurs($relations[$key], $yaddas, $relations);
+                    if(is_array($temp)){
+                        $yaddaM->setChildren($temp);
+                    }
+                $yaddaSorted[] = $yaddaM;
+            }
+        }
+        return $yaddaSorted;
+    }
+    private function recurs($arr, $yaddas, $relations){
+        echo "test";
+        if(is_array($arr)){
+            foreach($arr as $child){
+                $yaddaM = new YaddaModel();
+                $yaddaM->setId($child);
+                $yaddaM->retrieve();
+                $yad = $yaddas[$child];
+                    $temp = $this->recurs($relations[$child], $yaddas, $relations);
+                if(is_array($temp)){
+                    $yaddaM->setChildren($temp);
+                }
+                $newArr[] = $yaddaM;
+            }
+            if(is_array($newArr)){
+                return $newArr;
+            }
         }
     }
 }

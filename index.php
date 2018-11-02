@@ -1,4 +1,5 @@
 <?php
+session_start();
 define('rootPath', '');
 $pages[] = 'frontpage';
 $page = isset($_GET['page']) ? $_GET['page'] : $pages[0];

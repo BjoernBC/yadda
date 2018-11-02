@@ -1,10 +1,6 @@
 <?php
+session_start();
 define('rootPath', '../');
-require_once('../classes/models/userModel.php');
-$user = new UserModel();
-$user->setId(4);
-$user->retrieve();
-$user->update();
 require_once('../classes/controllers/controller.php');
 $action = $_POST['action'];
 $controller = new Controller();
