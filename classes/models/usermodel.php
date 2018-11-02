@@ -2,7 +2,7 @@
 require_once(rootPath . 'classes/models/model.php');
 class UserModel extends Model {
     private $con;
-    private $id, $email, $name, $pwd, $handle, $status, $permission;
+    private $id, $email, $name, $pwd, $handle, $status, $permission, $yaddas = array();
     public function __construct($table = "users") {
         parent::__construct();
         $this->con = $this->connect();
@@ -54,15 +54,21 @@ class UserModel extends Model {
     }
 
     public function create(){
-        $stmt = $this->con->prepare("INSERT INTO $this->table (name, email, password, handle, status, permission) VALUES (:name, :email, :pwd, :handle, :status, :permission)");
+        $stmt = $this->con->prepare("SELECT * FROM $this->table WHERE email = :email");
         $stmt->execute(array(
-            ':email' => $this->email,
-            ':name' => $this->name,
-            ':pwd' => password_hash($this->pwd, PASSWORD_DEFAULT),
-            ':handle' => $this->handle,
-            ':status' => 0,
-            ':permission' => $this->permission
+            ':email' => $this->email
         ));
+        if($stmt->rowCount() == 0){
+            $stmt = $this->con->prepare("INSERT INTO $this->table (name, email, password, handle, status, permission) VALUES (:name, :email, :pwd, :handle, :status, :permission)");
+            $stmt->execute(array(
+                ':email' => $this->email,
+                ':name' => $this->name,
+                ':pwd' => password_hash($this->pwd, PASSWORD_DEFAULT),
+                ':handle' => $this->handle,
+                ':status' => 1,
+                ':permission' => 0
+            ));
+        }
     }
     public function update(){
         $stmt = $this->con->prepare("SELECT password FROM $this->table WHERE id = :id");
@@ -123,7 +129,12 @@ class UserModel extends Model {
             $this->handle = $user->handle;
             $this->status = $user->status;
             $this->permission = $user->permission;
+            
         }
+
+    }
+    public function retrieveAll(){
+
     }
 }
 ?>

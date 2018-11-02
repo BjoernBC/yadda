@@ -16,6 +16,15 @@ class Controller {
                 return $view->output();
                 break;
 
+            case 'create-user':
+                require_once(rootPath . 'classes/models/usermodel.php');
+                require_once(rootPath . 'classes/views/userview.php');
+                $model = new UserModel();
+                $view = new UserView($model);
+                $view->prepNewUser();
+                return $view->output();
+                break;
+
             case 'yadda':
                 require_once(rootPath . 'classes/models/yaddamodel.php');
                 require_once(rootPath . 'classes/views/yaddaview.php');
@@ -45,9 +54,17 @@ class Controller {
             }
         }
     }
-    public function userCreate(){
+    public function userCreate($p){
         require_once(rootPath . 'classes/models/usermodel.php');
+        if(isset($p['user'])){
+            $user = $p['user'];
+        }
         $model = new userModel();
+        $model->setName($user['name']);
+        $model->setEmail($user['email']);
+        $model->setHandle($user['handle']);
+        $model->setPwd($user['password']);
+        $model->create();
     }
     /*
     public function createUser($p) {
