@@ -27,7 +27,26 @@ class YaddaView extends View {
     public function displayScore(){
     	
     }
+    public function displayList(){
+        $str = $this->prepHead();
+        foreach($this->model->retrieveAll() as $yadda){
+            $str .= "<div class='yadda'>";
+                $str .= "<div class='yaddaitem'>";
+                $str .= "<h3>";
+                $str .= $yada->getUser()->getHandle() . '#' . $yada->getUser()->getId();
+                $str .= "</h3>";
+                $str .= "</div>";
+            $str .= "</div>";
+        }
+        $str .= $this->prepEnd();
+        return $str;
+    }
     public function display(){
+        $str = "<form action='php/actionhandler.php' method='POST'>";
+        $str .= "<input type='hidden' name='action' value='logout'>";
+        $str .= "<input type='submit' value='Sign Out'>";
+        $str .= "</form>";
+        echo $str;
         echo $this->name;
         echo '<br>';
     	echo $this->auth;

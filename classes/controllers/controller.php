@@ -15,9 +15,9 @@ class Controller {
                 require_once(rootPath . 'classes/models/usermodel.php');
                 require_once(rootPath . 'classes/views/userview.php');
                 $model = new UserModel();
-                echo "<pre>";
+                /*echo "<pre>";
                 print_r($model->retrieveAll());
-                echo "</pre>";
+                echo "</pre>";*/
                 $view = new UserView($model);
                 $view->prepLogin();
                 return $view->output();
@@ -36,12 +36,12 @@ class Controller {
                 require_once(rootPath . 'classes/models/yaddamodel.php');
                 require_once(rootPath . 'classes/views/yaddaview.php');
                 $model = new YaddaModel();
-                //$model->retrieveAll();
-                $model->setId(3);
+                return $model->retrieveAll();
+               /* $model->setId(3);
                 $model->retrieve();
                 $view = new YaddaView($model);
                 $view->displayAuthor().$view->displayContent().$view->displayDate();
-                return $view->display();
+                return $view->display();*/
                 break;
             
             default:
@@ -75,7 +75,7 @@ class Controller {
     public function userLogin($p){
         $this->auth($p);
         if(Authentication::isAuthenticated()){
-            header("location: " . rootPath . "index.php?page=asdf");
+            header("location: " . rootPath . "index.php?page=yadda");
         }
         else{
             header("location: " . rootPath . "index.php?page=login");
@@ -92,5 +92,6 @@ class Controller {
     */
     public function logout(){
         Authentication::Logout();
+        header("location: " . rootPath . "index.php?page=create-user");
     }
 }

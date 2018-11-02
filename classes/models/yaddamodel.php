@@ -96,10 +96,10 @@ class YaddaModel extends Model {
             $user->setId($this->userid);
             $user->retrieve();
             $this->user = $user;
-            $img = new ImgModel();
+            /*$img = new ImgModel();
             $img->setId($this->id);
             $img->retrieve();
-            $this->img = $img;
+            $this->img = $img;*/
             // $this->alttext = $alttext;
         }
     }
@@ -131,7 +131,6 @@ class YaddaModel extends Model {
         return $yaddaSorted;
     }
     private function recurs($arr, $yaddas, $relations){
-        echo "test";
         if(is_array($arr)){
             foreach($arr as $child){
                 $yaddaM = new YaddaModel();

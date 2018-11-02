@@ -8,7 +8,7 @@ class UserView extends View{
     }
     public function prepLogin($store = true){
         $str = "<p>Don't have a user yet? <a href='?page=create-user'>create user</a></p>";
-        $str = "<form action='php/actionhandler.php' method='POST'>";
+        $str .= "<form action='php/actionhandler.php' method='POST'>";
         $str .= "<input type='hidden' name='action' value='userLogin'>";
     	$str .= "<input type='text' name='user[email]' placeholder='Your email, now!'>";
     	$str .= "<input type='password' name='user[password]' placeholder='and also your password...'>";
