@@ -76,6 +76,10 @@ class YaddaModel extends Model {
         }
         if($search){
             $col = $search['col'];
+            echo $col;
+            if (strlen($col) > 1) {
+                echo 'asdf';
+            }
             $stmt = $this->con->prepare("SELECT id, content, created, edited, userid FROM $this->table WHERE $col = :val");
             $stmt->execute(array(
                 ':val' => $search['value']

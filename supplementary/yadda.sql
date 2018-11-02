@@ -74,9 +74,9 @@ END//
 
 DELIMITER ;
 
-CALL newUser('admin@mail.dk', 'Admin Adminsen', 'admin', 'admin', 1, 1);
-CALL newUser('sirup@mail.dk', 'Søren Sirup', 'password', 'SizzleSoren', 0, 0);
-CALL newUser('mel@mail.dk', 'Morten Melboller', 'password', 'HotFudge', 1, 0);
+CALL newUser('admin@mail.dk', 'Admin Adminsen', '$2y$10$1InkUgCjFFbIr4/Lk/N8q.keWoNy35EZbxUtXJRRHzXrOqrbKqVpy', 'admin', 1, 1);
+CALL newUser('sirup@mail.dk', 'Søren Sirup', '$2y$10$1InkUgCjFFbIr4/Lk/N8q.keWoNy35EZbxUtXJRRHzXrOqrbKqVpy', 'SizzleSoren', 0, 0);
+CALL newUser('mel@mail.dk', 'Morten Melboller', '$2y$10$1InkUgCjFFbIr4/Lk/N8q.keWoNy35EZbxUtXJRRHzXrOqrbKqVpy', 'HotFudge', 1, 0);
 
 CALL newYadda('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
