@@ -4,7 +4,7 @@ class ImgModel extends Model{
 	private $con;
 	private $id, $img, $imgtype, $alttext;
 
-	public function __construct($table = "img") {
+	public function __construct($table = "image") {
         parent::__construct();
         $this->con = $this->connect();
         $this->table = $table;
@@ -13,8 +13,7 @@ class ImgModel extends Model{
     	return $this->id;
     }
     public function getImg(){
-
-    	return $this->imgContent;
+    	return $this->img;
     }
     public function getMime(){
     	return $this->imgtype;
@@ -30,15 +29,15 @@ class ImgModel extends Model{
     	$this->img = $img;
     }
 	public function setMime($img){
-    	$this->imgtype = $img;
+    	$this->imgtype = $imgtype;
     }
     public function setAlt($alttext){
     	$this->alttext = $alttext;
     }
 
     public function create(){
-    	$img = $_FILES['img']['tmp_name'];
-    	$imgContent = addslashes(file_get_contents($img));
+    	$image = $_FILES['img']['tmp_name'];
+    	$imgContent = addslashes(file_get_contents($image));
 
         $stmt = $this->con->prepare("INSERT INTO $this->table (file, mimetype, alttext) VALUES (:file, :mimetype, :alttext)");
         $stmt->execute(array(
@@ -48,8 +47,8 @@ class ImgModel extends Model{
         ));
     }
     public function update(){
-    	$img = $_FILES['img']['tmp_name'];
-    	$imgContent = addslashes(file_get_contents($img));
+    	$image = $_FILES['img']['tmp_name'];
+    	$imgContent = addslashes(file_get_contents($image));
 
         $stmt = $this->con->prepare("UPDATE $this->table SET file = :file, mimetype = :mimetype, alttext = :alttext WHERE id = :id");
         $stmt->execute(array(
@@ -78,13 +77,11 @@ class ImgModel extends Model{
             $stmt->execute(array(
                 ':val' => $search['value']
             ));
-            $image = $stmt->fetchObject();
-            $this->id = $image->id;
-            $this->file = $image->content;
-            $this->created = $image->created;
-            $this->userid = $image->userid;
+            $img = $stmt->fetchObject();
+            $this->id = $img->id;
+            $this->file = $img->content;
+            $this->created = $img->created;
         }
     }
-
 }
  ?>

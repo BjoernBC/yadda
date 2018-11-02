@@ -2,39 +2,39 @@
 require_once 'classes/views/View.php';
 
 class YaddaView extends View {
-
+    private $str;
     public function __construct($model) {
     	parent::__construct($model);
     }
 
-    private function displayAuthor(){
-    	$str = "<form action='php/actionhandler.php' method='POST'>";
-        $str .= "<input type='hidden' name='action' value='userLogin'>";
-        $str .= "<input type='text' name='email' placeholder='Your email, now!'>";
-        $str .= "<input type='password' name='password' placeholder='and also your password...'>";
-        $str .= "<input type='submit' value='Go HAM'>";
-        $str .= "</form>";
-        if($store){
-            $this->content[] = $str;
-        }
-        return $str;
+    public function displayAuthor(){
+        $this->name = $this->model->getUser()->getName();
+        $this->auth = "$".$this->model->getUser()->getHandle().'#'
+        .$this->model->getUser()->getId();
     }
-    private function displayContent(){
+    public function displayContent(){
+    	$this->content = $this->model->getContent();
+    }
+    public function displayDate(){
+    	$this->date = $this->model->getEdited();
+    }
+    public function displayReplyNo(){
     	
     }
-    private function displayDate(){
+    public function displayReplies(){
     	
     }
-    private function displayReplyNo(){
-    	
-    }
-    private function displayReplies(){
-    	
-    }
-    private function displayScore(){
+    public function displayScore(){
     	
     }
     public function display(){
-    	
+        echo $this->name;
+        echo '<br>';
+    	echo $this->auth;
+        echo '<br>';
+        echo $this->content;
+        echo '<br>';
+        echo $this->date;
+        echo '<br>';
     }
 }
