@@ -36,7 +36,9 @@ class Controller {
                 require_once(rootPath . 'classes/models/yaddamodel.php');
                 require_once(rootPath . 'classes/views/yaddaview.php');
                 $model = new YaddaModel();
-                return $model->retrieveAll();
+                $view = new YaddaView($model);
+                $view->displayList();
+                return $view->display();
                /* $model->setId(3);
                 $model->retrieve();
                 $view = new YaddaView($model);
