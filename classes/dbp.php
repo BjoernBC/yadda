@@ -12,5 +12,6 @@ abstract class DbP {
     const USERPWD = '';
     const DB = 'yadda';
     const CHARSET = 'utf8';
-    const DSN = "mysql:host=".self::DBHOST.";dbname=".self::DB.";charset=".self::CHARSET;
+    const DSN = "mysql:host=".self::DBHOST."
+    ;dbname=".self::DB.";charset=".self::CHARSET;
 }
